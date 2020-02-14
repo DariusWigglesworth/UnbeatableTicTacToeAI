@@ -6,19 +6,58 @@ programWins = 0
 ties = 0
 programFirst = True
 
-board = [[None, "|", None, "|", None], [None, "|", None, "|", None], [None, "|", None, "|", None]]
+# board = [[None, "|", None, "|", None], [None, "|", None, "|", None], [None, "|", None, "|", None]]
+# board = [[" ", "|", " ", "|", " "], [" ", "|", " ", "|", " "], [" ", "|", " ", "|", " "]]
+# for entry in board:
+#     for entry2 in entry:
+#         print(entry2)
+
+board = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
+spotTaken = [False, False, False, False, False, False, False, False, False]
+
+def printBoard():
+    for entry in board:
+        for space in entry:
+            print(space, end=" ")
+        print("\n")
+    return 0
+
+def inputTo2D(humanInput):
+    if humanInput < 4:
+        board[0][int(humanInput) - 1] = "X"
+    elif humanInput < 4:
+        board[1][int(humanInput) - 4] = "X"
+    else:
+        board[2][int(humanInput) - 7] = "X"
+    return 0
 
 def humanTurn():
+    print("It's your turn to go! Here's the board so far:")
+    printBoard()
+    entered = input("Please enter the number of the space that you would like to go: ")
+    if (int(entered) <= 0) or (int(entered) >= 10) or (spotTaken[entered] == False):
+        print("Invalid input, try again")
+        humanTurn()
+    
+    inputTo2D(entered)
+    spotTaken[entered] = True
     return 0
 
 def programTurn():
     return 0
 
-print("Welcome to the unbeatable tic-tac-toe machine\nYou have won ", humanWins, " to the programs ", programWins, "wins with ", ties, " ties")
-print("Would you like to play the game? Y/N")
+# print(board[0])
+# print("_ _ _\n")
+# print(board[1])
+# print("_ _ _\n")
+# print(board[2])
 
-entered = input()
-if entered.capitalize() != 'Y' or entered.capitalize() != 'N':
+printBoard()
+
+print("Welcome to the unbeatable tic-tac-toe machine\nYou have won ", humanWins, " to the programs ", programWins, "wins with ", ties, " ties")
+entered = input("Would you like to play the game? Y/N: ")
+
+if (entered.capitalize() != 'Y') and (entered.capitalize() != 'N'):
     print("Invalid input")
     sys.exit()
 elif entered.capitalize() == "N":
@@ -26,20 +65,22 @@ elif entered.capitalize() == "N":
     print("Goodbye!")
     sys.exit()
 
-if random.randrange(0, 1000) % 2 == 0:
+if (random.randrange(0, 1000) % 2 == 0):
     programFirst = True
     print("The program won the die roll and has chosen to go first")
+    programTurn()
 else:
     print("You have won the die roll. Would you like to go first? Y/N")
     entered = input()
-    if entered.capitalize() != 'Y' or entered.capitalize() != 'N':
+    if entered.capitalize() != 'Y' and entered.capitalize() != 'N':
         print("Invalid input")
         sys.exit()
+    humanTurn()
 
-print(board[0])
-print("\n")
-print("_ _ _\n")
-print(board[1])
-print("\n")
-print("_ _ _\n")
-print(board[2])
+# print(board[0])
+# print("\n")
+# print("_ _ _\n")
+# print(board[1])
+# print("\n")
+# print("_ _ _\n")
+# print(board[2])
