@@ -24,23 +24,26 @@ def printBoard():
 
 def inputTo2D(humanInput):
     if humanInput < 4:
-        board[0][int(humanInput) - 1] = "X"
-    elif humanInput < 4:
-        board[1][int(humanInput) - 4] = "X"
+        board[0][humanInput - 1] = "X"
+    elif humanInput < 7:
+        board[1][humanInput - 4] = "X"
     else:
-        board[2][int(humanInput) - 7] = "X"
+        board[2][humanInput - 7] = "X"
     return 0
 
 def humanTurn():
     print("It's your turn to go! Here's the board so far:")
     printBoard()
     entered = input("Please enter the number of the space that you would like to go: ")
-    if (int(entered) <= 0) or (int(entered) >= 10) or (spotTaken[entered] == False):
+    entered = int(entered)
+    
+    if (entered <= 0) or (entered >= 10) or (spotTaken[entered] == True):
         print("Invalid input, try again")
         humanTurn()
     
     inputTo2D(entered)
     spotTaken[entered] = True
+    printBoard()
     return 0
 
 def programTurn():
@@ -65,13 +68,13 @@ elif entered.capitalize() == "N":
     print("Goodbye!")
     sys.exit()
 
-if (random.randrange(0, 1000) % 2 == 0):
+# if (random.randrange(0, 1000) % 2 == 0):
+if (False == True):
     programFirst = True
     print("The program won the die roll and has chosen to go first")
     programTurn()
 else:
-    print("You have won the die roll. Would you like to go first? Y/N")
-    entered = input()
+    entered = input("You have won the die roll. Would you like to go first? Y/N: ")
     if entered.capitalize() != 'Y' and entered.capitalize() != 'N':
         print("Invalid input")
         sys.exit()
