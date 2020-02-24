@@ -6,14 +6,13 @@ programWins = 0
 ties = 0
 programFirst = True
 
-# board = [[None, "|", None, "|", None], [None, "|", None, "|", None], [None, "|", None, "|", None]]
-# board = [[" ", "|", " ", "|", " "], [" ", "|", " ", "|", " "], [" ", "|", " ", "|", " "]]
-# for entry in board:
-#     for entry2 in entry:
-#         print(entry2)
-
 board = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
 spotTaken = [False, False, False, False, False, False, False, False, False]
+
+def checkWin():
+    if (spotTaken[0] and spotTaken[1] and spotTaken[2]) or (spotTaken[3] and spotTaken[4] and spotTaken[5]) (spotTaken[6] and spotTaken[7] and spotTaken[8]):
+        return 1
+    return 0
 
 def printBoard():
     for entry in board:
@@ -49,12 +48,6 @@ def humanTurn():
 def programTurn():
     return 0
 
-# print(board[0])
-# print("_ _ _\n")
-# print(board[1])
-# print("_ _ _\n")
-# print(board[2])
-
 printBoard()
 
 print("Welcome to the unbeatable tic-tac-toe machine\nYou have won ", humanWins, " to the programs ", programWins, "wins with ", ties, " ties")
@@ -69,7 +62,7 @@ elif entered.capitalize() == "N":
     sys.exit()
 
 # if (random.randrange(0, 1000) % 2 == 0):
-if (False == True):
+if (False == True): #Temp so human always goes first (testing purposes)
     programFirst = True
     print("The program won the die roll and has chosen to go first")
     programTurn()
@@ -79,11 +72,3 @@ else:
         print("Invalid input")
         sys.exit()
     humanTurn()
-
-# print(board[0])
-# print("\n")
-# print("_ _ _\n")
-# print(board[1])
-# print("\n")
-# print("_ _ _\n")
-# print(board[2])
