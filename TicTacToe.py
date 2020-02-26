@@ -8,10 +8,23 @@ programFirst = True
 
 board = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
 spotTaken = [False, False, False, False, False, False, False, False, False]
+humanSpots = [False, False, False, False, False, False, False, False, False]
+programSpots = [False, False, False, False, False, False, False, False, False]
 
 def checkWin():
-    if (spotTaken[0] and spotTaken[1] and spotTaken[2]) or (spotTaken[3] and spotTaken[4] and spotTaken[5]) (spotTaken[6] and spotTaken[7] and spotTaken[8]):
+    if (programSpots[0] and programSpots[1] and programSpots[2]) or (programSpots[3] and programSpots[4] and programSpots[5]) or (programSpots[6] and programSpots[7] and programSpots[8]):
         return 1
+    elif (programSpots[0] and programSpots[3] and programSpots[6]) or (programSpots[1] and programSpots[4] and programSpots[7]) or (programSpots[2] and programSpots[5] and programSpots[8]):
+        return 1
+    elif (programSpots[0] and programSpots[4] and programSpots[8]) or (programSpots[2] and programSpots[4] and programSpots[6]):
+        return 1
+    elif (humanSpots[0] and humanSpots[1] and humanSpots[2]) or (humanSpots[3] and humanSpots[4] and humanSpots[5]) or (humanSpots[6] and humanSpots[7] and humanSpots[8]):
+        return 1
+    elif (humanSpots[0] and humanSpots [3] and humanSpots[6]) or (humanSpots[1] and humanSpots[4] and humanSpots[7]) or (humanSpots[2] and humanSpots[5] and humanSpots[8]):
+        return 1
+    elif (humanSpots[0] and humanSpots[4] and humanSpots[8]) or (humanSpots[2] and humanSpots[4] and humanSpots[6]):
+        return 1
+    
     return 0
 
 def printBoard():
@@ -42,6 +55,7 @@ def humanTurn():
     
     inputTo2D(entered)
     spotTaken[entered] = True
+    humanSpots[entered] = True
     printBoard()
     return 0
 
